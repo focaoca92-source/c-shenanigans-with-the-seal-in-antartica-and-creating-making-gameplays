@@ -23,5 +23,7 @@ int main(){
     } catch (const std::exception &e) {
         std::println("Error: {}", e.what());
     }
+    
+    return 0;
 }
 ```
