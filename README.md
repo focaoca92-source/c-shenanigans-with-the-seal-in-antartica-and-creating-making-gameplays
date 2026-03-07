@@ -6,11 +6,11 @@ C++ project for learning the language.
 
 ```cpp
 /* @file README.md
- * @brief This is just a random snippet that uses try-catch. Nothing really crazy or someshit
+ * @brief This is just a random snippet that uses try-catch. Nothing really crazy or some shit
+ * note: this snippet code requires C++23
  * @author Creitin Gameplays
  * @date 2026-03-07
 */
-
 import std;
 
 int main(){
