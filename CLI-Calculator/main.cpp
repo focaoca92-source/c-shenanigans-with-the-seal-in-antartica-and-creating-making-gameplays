@@ -1,6 +1,7 @@
 /* @file main.cpp
  * @brief this is a simple but functional calculator that uses Shunting-yard algorithm to make calculations
  * Was a pain in the ass to make this work ngl
+ * Important: no AI touched this code.
  * @author Creitin Gameplays
  * @date 2026-03-09
 */
