@@ -45,7 +45,7 @@ double compute(string expression) {
     std::vector<std::variant<string, char>> tokens;
 
     for (char character: expression){
-        if (std::isdigit((character)) || character == '.'){
+        if (std::isdigit((static_cast<unsigned char>(character))) || character == '.'){
             current_number += character;
         } else {
             if (current_number != ""){
