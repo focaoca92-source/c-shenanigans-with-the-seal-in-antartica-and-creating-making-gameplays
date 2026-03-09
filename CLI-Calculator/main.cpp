@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-using string = std::string;
+using string = std::string; // yes im lazy
 
 // declarations
 double compute(string expression);
