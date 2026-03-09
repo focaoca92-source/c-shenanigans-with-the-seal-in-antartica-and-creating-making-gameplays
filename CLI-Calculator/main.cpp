@@ -95,9 +95,9 @@ double compute(string expression) {
                 operators_stack.pop_back();
                 output.push_back(top);
             }
-            
         }
     }
+    // TODO: make the rest of the code
     
     // debug
     for (size_t i {0}; i < output.size(); i++){
