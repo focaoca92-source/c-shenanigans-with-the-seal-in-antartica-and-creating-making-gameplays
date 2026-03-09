@@ -1,14 +1,10 @@
 #include <cctype>
 #include <cstddef>
-#include <iostream>
 #include <print>
-#include <map>
 #include <sys/types.h>
-#include <typeinfo>
 #include <variant>
 #include <vector>
 #include <string>
-#include <charconv>
 
 using string = std::string;
 
@@ -98,7 +94,7 @@ double compute(string expression) {
         }
     }
     // TODO: make the rest of the code
-    
+
     // debug
     for (size_t i {0}; i < output.size(); i++){
         std::visit([output](auto& argm) {
