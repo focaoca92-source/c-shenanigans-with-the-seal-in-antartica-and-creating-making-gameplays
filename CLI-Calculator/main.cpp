@@ -126,7 +126,7 @@ double compute(string expression) {
         }
     }
     
-    std::vector<double> values_stack;
+    std::vector<double> values_stack; // this is where things gonna happen
 
     for (size_t token {}; token < output.size(); token++){
         double temp_num;
