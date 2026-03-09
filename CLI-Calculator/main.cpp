@@ -1,12 +1,17 @@
+/* @file main.cpp
+ * @brief this is a simple but functional calculator that uses Shunting-yard algorithm to make calculations
+ * Was a pain in the ass to make this work ngl
+ * @author Creitin Gameplays
+ * @date 2026-03-09
+*/
 #include <cctype>
 #include <cstddef>
 #include <print>
-#include <sys/types.h>
 #include <variant>
 #include <vector>
 #include <string>
 
-using string = std::string; // yes im lazy
+using string = std::string; // lazy to type std:: every line
 
 // declarations
 double compute(string expression);
@@ -14,11 +19,13 @@ int priority(char op);
 
 // main
 int main() {
-    string exprToSolve {"3 + 4 * (12 - 4 * 5) / 2 + 3"};
+    string exprToSolve {"3 + 4 * (12 - 4 * 5) / 2 + 3"}; // THIS IS THE EXPRESSION TO EVALUATE
+    // so not a really CLI calculator, I would need to use cin to get user input and shit
+    // i do this another time, i'll will keep this hardcoded for now.
 
     // call the function:
-    compute(exprToSolve);
-
+    double result = compute(exprToSolve);
+    std::println("Final result: {}", result);
     return 0;
 }
 
@@ -34,8 +41,6 @@ int priority(char op){
 
 double compute(string expression) {
     string current_number {};
-    // std::map<double, char> token;
-
     std::vector<std::variant<string, char>> tokens;
 
     for (char character: expression){
@@ -50,7 +55,7 @@ double compute(string expression) {
             if (std::string("+-*/()").find(character) != std::string::npos){
                 tokens.push_back(character);
             } else if (character == ' '){
-                continue; // do nothing
+                // do nothing
             }
         }
     }
@@ -58,13 +63,13 @@ double compute(string expression) {
         tokens.push_back(current_number);
     }
 
-    std::println("Expression cleaned:");
+    // debug
+    /*
     for (size_t i {0}; i < tokens.size(); i++){
         std::visit([](auto& argm) {
-            //std::println("Numbers and expression: {}", argm);
+            std::println("Numbers and expression: {}", argm);
         }, tokens[i]);
-    }
-    std::println();
+    }*/
     
     std::vector<std::variant<double, char>> output;
     std::vector<char> operators_stack;
@@ -80,27 +85,85 @@ double compute(string expression) {
         if (!(std::string("+-*/()").find(temp_num) != std::string::npos)){ // its a number
             double num = std::stod(temp_num); // convert to double
             output.push_back(num);
+
         } else if (std::string("+-*/").find(temp_num) != std::string::npos){ // its an operator
-            while (operators_stack.size() > 0 && (std::string("+-*/").find(operators_stack[-1]) != std::string::npos) && priority(operators_stack[-1]) >= priority(std::get<char>(tokens[token]))) {
-                std::println("Test {}", operators_stack[-1]);
-                output.push_back(operators_stack[-1]); // ?
+            while (operators_stack.size() > 0 && (std::string("+-*/").find(operators_stack.back()) != std::string::npos) && priority(operators_stack.back()) >= priority(std::get<char>(tokens[token]))) {
+                if (!(operators_stack.empty())){ // prevent seg fault
+                    char top = operators_stack.back();
+                    operators_stack.pop_back();
+                    output.push_back(top);
+                }
             }
 
-            if (!(operators_stack.empty())){ // prevent seg fault
-                char top = operators_stack.back();
-                operators_stack.pop_back();
-                output.push_back(top);
+            operators_stack.push_back(std::get<char>(tokens[token])); // get the char from the tokens vector
+
+        } else if (std::get<char>(tokens[token]) == '(') { // if opening parenthesis
+            operators_stack.push_back(std::get<char>(tokens[token]));
+
+        } else if (std::get<char>(tokens[token]) == ')') { // if closing parenthesis
+            while (operators_stack.size() > 0 && operators_stack.back() != '('){
+                if (!(operators_stack.empty())){ // we avoid seg fault here as well
+                    char top = operators_stack.back();
+                    operators_stack.pop_back();
+                    output.push_back(top);
+                }
+            }
+
+            if (operators_stack.size() > 0 && operators_stack.back() == '(') {
+                if (!(operators_stack.empty())){
+                    operators_stack.pop_back();
+                }
             }
         }
     }
-    // TODO: make the rest of the code
 
+    while (operators_stack.size() > 0){
+        if (!(operators_stack.empty())){ // also here
+            char top = operators_stack.back();
+            operators_stack.pop_back();
+            output.push_back(top);
+        }
+    }
+    
+    std::vector<double> values_stack;
+
+    for (size_t token {}; token < output.size(); token++){
+        double temp_num;
+        std::visit([&temp_num](auto& argm) { // store the value (by reference)
+            temp_num = argm;
+        }, output[token]);
+
+        if (!(std::string("+-*/()").find(temp_num) != std::string::npos)){ // number
+            values_stack.push_back(temp_num);
+
+        } else {
+            double b1 = values_stack.back();
+            values_stack.pop_back();
+            double b = b1;
+
+            double a1 = values_stack.back();
+            values_stack.pop_back();
+            double a = a1;
+
+            if (std::get<char>(output[token]) == '+'){
+                values_stack.push_back(a + b);
+            } else if (std::get<char>(output[token]) == '-'){
+                values_stack.push_back(a - b);
+            } else if (std::get<char>(output[token]) == '*'){
+                values_stack.push_back(a * b);
+            } else if (std::get<char>(output[token]) == '/'){
+                values_stack.push_back(a / b);
+            }
+        }
+    }
     // debug
+    /*
     for (size_t i {0}; i < output.size(); i++){
         std::visit([output](auto& argm) {
             std::println("Numbers on output: {}", argm);
         }, output[i]);
-    }
+    }*/
 
-    return 0;
+    std::println("****** Output {}", values_stack[0]);
+    return values_stack[0]; // final result
 }
