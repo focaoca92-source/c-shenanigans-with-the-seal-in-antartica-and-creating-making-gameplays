@@ -22,7 +22,7 @@ int priority(char op);
 int main() {
     string exprToSolve {"3 + 4 * (12 - 4 * 5) / 2 + 3"}; // THIS IS THE EXPRESSION TO EVALUATE
     // so not a really CLI calculator, I would need to use cin to get user input and shit
-    // i do this another time, i'll will keep this hardcoded for now.
+    // i'll do this another time, for now keep this hardcoded 
 
     // call the function:
     double result = compute(exprToSolve);
