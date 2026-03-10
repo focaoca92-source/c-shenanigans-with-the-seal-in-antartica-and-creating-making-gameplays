@@ -63,15 +63,8 @@ double compute(string expression) {
     if (current_number != ""){
         tokens.push_back(current_number);
     }
-
-    // debug
-    /*
-    for (size_t i {0}; i < tokens.size(); i++){
-        std::visit([](auto& argm) {
-            std::println("Numbers and expression: {}", argm);
-        }, tokens[i]);
-    }*/
     
+    // setup
     std::vector<std::variant<double, char>> output;
     std::vector<char> operators_stack;
 
@@ -89,7 +82,7 @@ double compute(string expression) {
 
         } else if (std::string("+-*/").find(temp_num) != std::string::npos){ // its an operator
             while (operators_stack.size() > 0 && (std::string("+-*/").find(operators_stack.back()) != std::string::npos) && priority(operators_stack.back()) >= priority(std::get<char>(tokens[token]))) {
-                if (!(operators_stack.empty())){ // prevent seg fault
+                if (!(operators_stack.empty())){
                     char top = operators_stack.back();
                     operators_stack.pop_back();
                     output.push_back(top);
@@ -103,7 +96,7 @@ double compute(string expression) {
 
         } else if (std::get<char>(tokens[token]) == ')') { // if closing parenthesis
             while (operators_stack.size() > 0 && operators_stack.back() != '('){
-                if (!(operators_stack.empty())){ // we avoid seg fault here as well
+                if (!(operators_stack.empty())){
                     char top = operators_stack.back();
                     operators_stack.pop_back();
                     output.push_back(top);
@@ -119,7 +112,7 @@ double compute(string expression) {
     }
 
     while (operators_stack.size() > 0){
-        if (!(operators_stack.empty())){ // also here
+        if (!(operators_stack.empty())){
             char top = operators_stack.back();
             operators_stack.pop_back();
             output.push_back(top);
@@ -155,15 +148,9 @@ double compute(string expression) {
             } else if (std::get<char>(output[token]) == '/'){
                 values_stack.push_back(a / b);
             }
+            // i could've used switch() here, but I like if-else more.
         }
     }
-    // debug
-    /*
-    for (size_t i {0}; i < output.size(); i++){
-        std::visit([output](auto& argm) {
-            std::println("Numbers on output: {}", argm);
-        }, output[i]);
-    }*/
 
     std::println("****** Output {}", values_stack[0]);
     return values_stack[0]; // final result
