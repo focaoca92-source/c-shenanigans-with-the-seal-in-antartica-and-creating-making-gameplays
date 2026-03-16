@@ -39,13 +39,13 @@ double compute(string expression) {
                 tokens.push_back(static_cast<unsigned char>(character));
             } else if (character == ' '){
                 // do nothing
-            } 
+            }
         }
     }
     if (current_number != ""){
         tokens.push_back(current_number);
     }
-    
+
     // setup
     std::vector<std::variant<double, unsigned char>> output;
     std::vector<unsigned char> operators_stack;
@@ -100,7 +100,7 @@ double compute(string expression) {
             output.push_back(static_cast<unsigned char>(top));
         }
     }
-    
+
     std::vector<double> values_stack; // this is where things gonna happen
     for (size_t token {}; token < output.size(); token++){
         double temp_num;
@@ -109,7 +109,7 @@ double compute(string expression) {
         }, output[token]);
 
         if (std::holds_alternative<double>(output[token])){ // number
-            values_stack.push_back(temp_num); 
+            values_stack.push_back(temp_num);
 
         } else {
             // error handling
