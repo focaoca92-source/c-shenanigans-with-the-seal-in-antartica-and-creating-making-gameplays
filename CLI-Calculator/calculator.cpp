@@ -139,7 +139,7 @@ double compute(string expression) {
     }
 
     if (!values_stack.empty() && values_stack[0]) {
-        std::println("****** Output {}", values_stack[0]);
+        std::println("OUTPUT = {}", values_stack[0]);
         return values_stack[0]; // final result
     } else {
         throw std::runtime_error("Fatal error occurred");
