@@ -27,3 +27,11 @@ int main(){
     return 0;
 }
 ```
+
+Debug:
+```
+gdb ./build/calculator
+(gdb) run
+(gdb) bt
+
+```

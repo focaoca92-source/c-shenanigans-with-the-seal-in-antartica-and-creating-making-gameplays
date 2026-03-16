@@ -1,0 +1,9 @@
+-xc++
+-std=c++23
+-Wall
+-Wextra
+-Iinclude
+-stdlib=libc++
+-fmodules
+-fbuiltin-module-map
+-fmodule-file=std=std.pcm
