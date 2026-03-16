@@ -23,7 +23,7 @@ int main(){
     } catch (const std::exception &e) {
         std::println("Error: {}", e.what());
     }
-    
+
     return 0;
 }
 ```
@@ -33,5 +33,4 @@ Debug:
 gdb ./build/calculator
 (gdb) run
 (gdb) bt
-
 ```
