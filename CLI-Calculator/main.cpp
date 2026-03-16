@@ -14,10 +14,6 @@
 
 using string = std::string; // lazy to type std:: every line
 
-// declarations
-double compute(string expression);
-int priority(char op);
-
 // main
 int main() {
     string exprToSolve {"3 + 4 * (12 - 4 * 5) / 2 + 3"}; // THIS IS THE EXPRESSION TO EVALUATE
