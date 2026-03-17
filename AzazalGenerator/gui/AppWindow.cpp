@@ -31,7 +31,7 @@ void mainWindow() {
     IM_ASSERT(LoadTex);
 
     GLuint my_image_texture_2 = 0;
-    bool LoadTex2 = LoadTextureFromFile("ro.jpg", &my_image_texture_2, &my_image_width, &my_image_height);
+    bool LoadTex2 = LoadTextureFromFile("ro.jpg", &my_image_texture_2, &my_image_width, &my_image_height); // roka
     IM_ASSERT(LoadTex2);
 
     // main loop
