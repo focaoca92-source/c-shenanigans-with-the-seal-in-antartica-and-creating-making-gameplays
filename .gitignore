@@ -2,4 +2,8 @@ build/
 test
 *.o
 unusedCode/
+deps/
 main.exe
+.vscode/
+imgui.ini
+az.jpg
