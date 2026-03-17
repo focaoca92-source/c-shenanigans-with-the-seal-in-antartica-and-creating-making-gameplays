@@ -1,2 +1,6 @@
-# instructions
-just build with cmake.
+# Instructions
+
+just build with cmake:
+```
+cmake --build build  
+```
