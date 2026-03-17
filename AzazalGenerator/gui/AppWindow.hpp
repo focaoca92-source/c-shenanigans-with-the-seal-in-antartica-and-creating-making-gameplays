@@ -43,7 +43,6 @@ public:
         ImVec2 imgSize((float)width * scaleSize, (float)height * scaleSize);
         ImVec2 imgSizeWin((float)width * scaleSize + 25, (float)height * scaleSize + 25);
 
-        // load image
         // window setup
         ImGuiWindowFlags win_flags = ImGuiWindowFlags_NoResize |  ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse; // disable resizing.
         ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(1.0f, 0.0f, 0.0f, 0.0f)); // windows background (transparent)
@@ -76,7 +75,7 @@ public:
                     ImGui::Image((ImTextureID)(intptr_t)texture2, imgSize); // load another image
                 }
             }
-            
+
             ImGui::End();
         }
 
