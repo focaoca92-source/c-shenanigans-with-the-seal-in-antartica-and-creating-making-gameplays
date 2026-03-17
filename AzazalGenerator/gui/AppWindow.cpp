@@ -5,7 +5,6 @@
 #include <algorithm>
 
 // fall logic
-void fall(){}
 void mainWindow() {
     // check GLFW initialization first
     if (!glfwInit()){
