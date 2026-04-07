@@ -58,3 +58,10 @@ int main() {
     std::println("Stopped");
     return 0;
 }
+
+// issues according to "hey claude":
+// 1. misused class
+// 2. _sleep deprecated with best replacement
+// 3. concatenating filepath with += instead of /
+// 4. no error handling for image and font loading
+// do i care?
