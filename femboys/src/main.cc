@@ -7,6 +7,8 @@
 #include <regex>
 #include <memory>
 
+// helper function to get the fucking ass program executable path, where
+// the font and image files are.
 std::filesystem::path GetTheMotherFuckingPath(){
     // win32
     wchar_t path[2048];
@@ -34,7 +36,7 @@ class startProgram {
 
             while (thisFuckingWindow.isOpen()){
                 // event
-                _sleep(80); // cpu and gpu need a rest (80ms update)
+                _sleep(80); // even the cpu and gpu need a rest (80ms update)
                 while (const std::optional event = thisFuckingWindow.pollEvent()){
                     if (event->is<sf::Event::Closed>()){
                         thisFuckingWindow.close();
