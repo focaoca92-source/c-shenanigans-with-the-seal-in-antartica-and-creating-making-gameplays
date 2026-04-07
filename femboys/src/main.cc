@@ -19,12 +19,11 @@ std::filesystem::path GetTheMotherFuckingPath(){
 
 class startProgram {
     public:
-        void start(){
+        startProgram(){
             sf::RenderWindow thisFuckingWindow(sf::VideoMode({800, 600}), "femboy virus");
-
             // load image
             std::filesystem::path clean_img_path = GetTheMotherFuckingPath() += "\\img.jpg";
-            const sf::Texture thisFuckingTexture(clean_img_path);
+            sf::Texture thisFuckingTexture(clean_img_path);
             sf::Sprite thisFuckingSprite(thisFuckingTexture);
 
             // load font and text
@@ -35,12 +34,14 @@ class startProgram {
 
             while (thisFuckingWindow.isOpen()){
                 // event
+                _sleep(80); // cpu and gpu need a rest (80ms update)
                 while (const std::optional event = thisFuckingWindow.pollEvent()){
                     if (event->is<sf::Event::Closed>()){
                         thisFuckingWindow.close();
                     }
                 }
 
+                // show the stuff in real time
                 thisFuckingWindow.clear();
                 thisFuckingWindow.draw(thisFuckingSprite);
                 thisFuckingWindow.draw(thisFuckingText);
@@ -51,8 +52,7 @@ class startProgram {
 
 int main() {
     std::println("Running");
-    startProgram femboySpawn;
-    femboySpawn.start();
+    startProgram::startProgram();
     std::println("Stopped");
     return 0;
 }
