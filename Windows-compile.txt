@@ -1,2 +1,4 @@
 # code
 clang++.exe -std=c++23 -stdlib=libc++ -Wall -Wextra -Wpedantic -fsanitize=address .\CLI-Calculator\main.cpp .\CLI-Calculator\calculator.cpp -o main.exe
+
+clang.exe -g -O0 -fno-omit-frame-pointer -fsanitize=address -std=c23 -Wall -Wextra -Wpedantic .\unusedCode\tuff.c -o main.exe
